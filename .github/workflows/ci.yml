@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  spm-build:
+    name: SwiftPM Build (iOS Simulator)
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Xcode version
+        run: xcodebuild -version
+
+      - name: Build (iOS Simulator)
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -scheme GradientBlur \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            build \
+            | xcbeautify --renderer github-actions || true
+
+  spm-test:
+    name: SwiftPM Tests
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode.app
+
+      - name: Swift test
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -scheme GradientBlur \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -configuration Debug \
+            test \
+            | xcbeautify --renderer github-actions || true
+
+  demo-build:
+    name: Demo App Build
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install xcodegen
+        run: brew install xcodegen
+
+      - name: Generate Example project
+        working-directory: Example
+        run: xcodegen generate
+
+      - name: Build Demo (iOS Simulator)
+        working-directory: Example
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project GradientBlurDemo.xcodeproj \
+            -scheme GradientBlurDemo \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            build \
+            | xcbeautify --renderer github-actions || true

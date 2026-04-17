@@ -1,0 +1,32 @@
+name: GradientBlurDemo
+options:
+  minimumXcodeGenVersion: 2.39.0
+settings:
+  base:
+    SWIFT_VERSION: 6.0
+    IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+packages:
+  GradientBlur:
+    path: ..
+targets:
+  GradientBlurDemo:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: GradientBlurDemo
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.gradientblurdemo
+        INFOPLIST_FILE: GradientBlurDemo/Info.plist
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: GradientBlur
+        product: GradientBlur
+schemes:
+  GradientBlurDemo:
+    build:
+      targets:
+        GradientBlurDemo: all
+    run:
+      config: Debug

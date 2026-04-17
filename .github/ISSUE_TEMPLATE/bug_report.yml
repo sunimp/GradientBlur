@@ -1,0 +1,68 @@
+name: Bug 报告 / Bug report
+description: 报告组件的异常行为
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢报告 bug。请尽量提供可复现的最小示例。
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      description: GradientBlur 版本号（如 0.1.0）或 commit hash
+      placeholder: "0.1.0 / 7f3c2a1"
+    validations:
+      required: true
+  - type: dropdown
+    id: ios
+    attributes:
+      label: 运行环境
+      options:
+        - iOS 15.x
+        - iOS 16.x
+        - iOS 17.x
+        - iOS 18.x
+        - iOS 19.x
+        - iOS 26.x（新路径）
+        - 其它
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: 设备 / 模拟器
+      placeholder: "iPhone 15 Pro 真机 / iPhone 17 Pro 模拟器"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 可附截图 / 录屏
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 越详细越好；最好给出可编译的最小代码片段
+      placeholder: |
+        1. 创建 GradientBlurView(direction: .topToBottom)
+        2. 调用 update(...)
+        3. 看到 ...
+      render: markdown
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 相关日志 / 截图
+      description: 可选
+      render: text

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 使用问题 / Usage question
+    url: https://github.com/sunimp/GradientBlur/discussions
+    about: 请到 Discussions 提问，issue 区仅用于 bug 与 feature request
