@@ -41,8 +41,8 @@ enum CAFilterBridge {
         NSClassFromString(decode(Obfuscated.backdropLayerClassName)) as AnyObject as? NSObjectProtocol
 
     private static let filterWithNameSelector = Selector(decode(Obfuscated.filterWithNameSelector))
-    private static let allocSelector = Selector(("alloc"))
-    private static let initSelector = Selector(("init"))
+    private static let allocSelector = NSSelectorFromString("alloc")
+    private static let initSelector = #selector(NSObject.init)
 
     private static func decode(_ base64: String) -> String {
         guard
