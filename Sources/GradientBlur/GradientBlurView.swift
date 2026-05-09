@@ -116,7 +116,6 @@ public final class GradientBlurView: UIView {
         currentStartOffset = clampedOffset
 
         let bounds = CGRect(origin: .zero, size: size)
-        transition.updateFrame(view: backdropHostView, frame: bounds)
         transition.updateFrame(view: tintImageView, frame: bounds)
 
         if didLayoutChange {
@@ -128,10 +127,32 @@ public final class GradientBlurView: UIView {
             tintImageView.image = maskImage?.withRenderingMode(.alwaysTemplate)
         }
 
-        // Blur 层的"可见段"比 tint 层稍短 4pt，避免 blur 边缘硬边被看见。
-        let blurVisibleHeight = max(1.0, clampedConstant - 4.0)
+        // Blur 层的渐变段比 tint 层稍短 4pt，避免 blur 边缘硬边被看见。
+        // 仅从渐变段减去，solid 段（startOffset）保持不变。
+        let gradientOnlyHeight = max(1.0, clampedConstant - clampedOffset)
+        let blurGradientHeight = max(1.0, gradientOnlyHeight - 4.0)
+        let blurVisibleHeight = blurGradientHeight + clampedOffset
+
+        // backdropHostView 只覆盖 blur 可见区域，把硬边藏在渐变顶部外面
+        let blurHostFrame = if direction == .bottomToTop {
+            CGRect(
+                x: 0.0,
+                y: size.height - blurVisibleHeight,
+                width: size.width,
+                height: blurVisibleHeight
+            )
+        } else {
+            CGRect(
+                x: 0.0,
+                y: 0.0,
+                width: size.width,
+                height: blurVisibleHeight
+            )
+        }
+        transition.updateFrame(view: backdropHostView, frame: blurHostFrame)
+
         blurLayer?.update(
-            size: size,
+            size: CGSize(width: size.width, height: blurVisibleHeight),
             constantHeight: blurVisibleHeight,
             position: direction == .bottomToTop ? .bottom : .top,
             inwardsExtension: clampedOffset > 0 ? clampedOffset : nil,
