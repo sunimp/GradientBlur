@@ -8,6 +8,9 @@ settings:
 packages:
   GradientBlur:
     path: ..
+  LookInside-Release:
+    url: https://github.com/LookInsideApp/LookInside-Release.git
+    version: 0.2.0
 targets:
   GradientBlurDemo:
     type: application
@@ -23,6 +26,8 @@ targets:
     dependencies:
       - package: GradientBlur
         product: GradientBlur
+      - package: LookInside-Release
+        product: LookInsideServer
 schemes:
   GradientBlurDemo:
     build:

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		38D257DB736493076146A4DE /* GradientBlur in Frameworks */ = {isa = PBXBuildFile; productRef = A201EB9E620548C34C65CA05 /* GradientBlur */; };
 		7B3860C239277F0A4079A8F4 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24EF7F33BEF281268E69439E /* DemoViewController.swift */; };
-		A4DF2BE32F92048600358AC0 /* LookinServer in Frameworks */ = {isa = PBXBuildFile; productRef = A4DF2BE22F92048600358AC0 /* LookinServer */; };
+		AFF1CA83DA43719E09A9CC86 /* LookInsideServer in Frameworks */ = {isa = PBXBuildFile; productRef = 21CA6BA632AA3117559FE4EF /* LookInsideServer */; };
 		D6CF849F73A98117621EA887 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B848EFAA72B106910E64DF8E /* AppDelegate.swift */; };
 		EE330A634E63725A70A4003B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A98EB17565542D47E1CB09 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38D257DB736493076146A4DE /* GradientBlur in Frameworks */,
-				A4DF2BE32F92048600358AC0 /* LookinServer in Frameworks */,
+				AFF1CA83DA43719E09A9CC86 /* LookInsideServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +89,7 @@
 			name = GradientBlurDemo;
 			packageProductDependencies = (
 				A201EB9E620548C34C65CA05 /* GradientBlur */,
-				A4DF2BE22F92048600358AC0 /* LookinServer */,
+				21CA6BA632AA3117559FE4EF /* LookInsideServer */,
 			);
 			productName = GradientBlurDemo;
 			productReference = E370243A32ED30B8C8CD840E /* GradientBlurDemo.app */;
@@ -103,6 +103,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 9F39B77695F294C5D30B2F9D /* Build configuration list for PBXProject "GradientBlurDemo" */;
 			developmentRegion = en;
@@ -114,8 +116,8 @@
 			mainGroup = 3D83E93D8B59F1011B5ACCD7;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				3552ACF9CD6F4EC279993454 /* XCRemoteSwiftPackageReference "LookInside-Release" */,
 				6D45E36B8E2BA1873C153BE3 /* XCLocalSwiftPackageReference ".." */,
-				A4DF2BE12F92048600358AC0 /* XCRemoteSwiftPackageReference "LookInside" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 160152852BD9658742B97BE0 /* Products */;
@@ -325,25 +327,25 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A4DF2BE12F92048600358AC0 /* XCRemoteSwiftPackageReference "LookInside" */ = {
+		3552ACF9CD6F4EC279993454 /* XCRemoteSwiftPackageReference "LookInside-Release" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Lakr233/LookInside";
+			repositoryURL = "https://github.com/LookInsideApp/LookInside-Release.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.6;
+				kind = exactVersion;
+				version = 0.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		21CA6BA632AA3117559FE4EF /* LookInsideServer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3552ACF9CD6F4EC279993454 /* XCRemoteSwiftPackageReference "LookInside-Release" */;
+			productName = LookInsideServer;
+		};
 		A201EB9E620548C34C65CA05 /* GradientBlur */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GradientBlur;
-		};
-		A4DF2BE22F92048600358AC0 /* LookinServer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A4DF2BE12F92048600358AC0 /* XCRemoteSwiftPackageReference "LookInside" */;
-			productName = LookinServer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
